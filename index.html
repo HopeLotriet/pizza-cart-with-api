@@ -14,13 +14,20 @@
 
 <div class="API">
 
-<div class="cart" x-cloak>
-    <div>Username: <input class="input" type="text" x-model="username">
-    <button class="button" x-on:click="login" x-show="[cartId]">Login</button>
-    <button class="button" x-on:click="logout" x-show="username && cartId">Logout</button>
-    </div><br>
-    <div x-show="cartId">Cart code: <span x-text="cartId"></span></div>
-    <div x-show="cartTotal > 0">
+    <div class="username" x-cloak>
+
+        <div>Username: <input class="input" type="text" x-model="username">
+            <button class="button" x-on:click="login" x-show="[cartId]">Login</button>
+            <button class="button" x-on:click="logout" x-show="username && cartId">Logout</button>
+        </div><br>
+        <div x-show="cartId">Cart code: <span x-text="cartId"></span></div>
+        <div x-show="cartTotal > 0"><button class="view" x-on:click="viewCart= !viewCart"><img src="viewCart.png"
+                    alt="shopping cart" width="30px">View Cart</button></div>
+    </div>
+
+
+    <div class="cart" x-cloak x-show="viewCart">
+
     <h2>Your Cart</h2>
     
     <table class="container">
@@ -62,7 +69,30 @@
 
 
  
+
 <div class="pizza" x-show="username && cartId">
+
+    <div x-show="featuredPizza">
+        <h3 class="feat">Featured Pizzas</h3>
+        <div class="featured">
+
+            <template x-for="pizza in featuredPizzas">
+                <div class="pizza1">
+                    <img class="image" x-bind:src="pizzaImage(pizza)" alt="pizza" width="60px">
+                    <h3 class="flavour"><span x-text="pizza.flavour"></span></h3>
+                    <h4><span x-text="pizza.size"></span></h4>
+                    R <span x-text="pizza.price"></span><br>
+                    <button x-on:click="addPizzaToCart(pizza.id)"><img src="Cart.png" alt="add to cart"
+                            width="30px"></button>
+                </div>
+
+            </template>
+        </div>
+
+
+
+    </div>
+
     <h2>Pizzas</h2>
     <table class="table_2">
         <tr class="tr">
@@ -75,21 +105,31 @@
         </tr>
 
         <template x-for="pizza in pizzas">
-    <tr class="tr">
-       
-        <td><img x-bind:src="pizzaImage(pizza)" alt="pizza" width="40px"></td>
-        <td><span x-text="pizza.size"></span></td>
-        <td><span x-text="pizza.type"></span></td>
-        <td><h5 x-text="pizza.flavour"></h5></td>
-        <td><span x-text="pizza.price"></span></td>
-        <td><button x-on:click="addPizzaToCart(pizza.id)">Add to cart</button></td>
-    </tr>
-</template>
-</table>
+            <tr class="tr">
 
+                <td><img x-bind:src="pizzaImage(pizza)" alt="pizza" width="40px"></td>
+                <td><span x-text="pizza.size"></span></td>
+                <td><span x-text="pizza.type"></span></td>
+                <td>
+                    <h5 x-text="pizza.flavour"></h5>
+                </td>
+                <td><span x-text="pizza.price"></span></td>
+                <td><button x-on:click="addPizzaToCart(pizza.id)"><img src="Cart.png" alt="add to cart"
+                            width="20px"></button></td>
+            </tr>
+        </template>
+    </table>
+
+
+    <div class="footer">
+        <h5><img src="contact.jpg" alt="contact us" width="25">Contact Details</h5>
+        <p>Contact us at 011 578 4378</p>
+        <p>www.MusawenkosiPizza.co.za</p>
+        <p>Facebook: Perfect Pizza <img src="facebook.png" alt="facebook icon" width="15"></p>
+        <p>Instagram: Perfect Pizza<img src="ig.png" alt="instagram icon" width="15"></p>
+    </div>
 </div>
 
-</div>
 
 <script src="https://unpkg.com/alpinejs" defer></script>
 </body>
