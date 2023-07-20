@@ -36,12 +36,10 @@ document.addEventListener('alpine:init', () => {
 
 
             createCart() {
-
                 if (!this.username) {
                     //this.cartId = 'No username to create a cart for'
                     return;
                 }
-
 
                 const cartId = localStorage['cartId'];
 
